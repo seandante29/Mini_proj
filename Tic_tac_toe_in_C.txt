@@ -1,0 +1,65 @@
+#include<stdio.h>
+void printboard();
+int game();
+char numbers[]={'0','1','2','3','4','5','6','7','8','9'};
+void main(){
+    int player=1,input,status=-1;
+    while(status==-1){
+        char mark=(player%2!=0)?'X':'O';
+        player=(player%2!=0)?1:2;
+        printf("enter the input player %d: ",player);
+        scanf("%d",&input);
+        numbers[input]=mark;
+        if(input<1||input>9)
+            printf("\ninvalid input\n");
+        else
+            player++;
+        printboard();
+        status=game();
+    }
+    if(status==1)
+        printf("\nCongrats!!! player %d has won the game\n\n",player-1);
+    if(status==0)
+        printf("\n The match has been declared as DRAW\n");
+    printf("\n\n-----------END GAME-----------------\n\n");
+        
+}
+void printboard(){
+    printf("        |       |       \n");
+    printf("   %c    |   %c   |   %c    \n",numbers[1],numbers[2],numbers[3]);
+    printf("________|_______|_______\n");
+    printf("        |       |       \n");
+    printf("   %c    |   %c   |   %c    \n",numbers[4],numbers[5],numbers[6]);
+    printf("________|_______|_______\n");
+    printf("        |       |       \n");
+    printf("   %c    |   %c   |   %c    \n",numbers[7],numbers[8],numbers[9]);
+    printf("        |       |       \n");
+}
+int game(){
+    {
+    if(numbers[1]==numbers[2]&&numbers[2]==numbers[3])
+    return 1;
+    if(numbers[4]==numbers[5]&&numbers[5]==numbers[6])
+    return 1;
+    if(numbers[7]==numbers[8]&&numbers[8]==numbers[9])
+    return 1;
+    if(numbers[1]==numbers[4]&&numbers[4]==numbers[7])
+    return 1;
+    if(numbers[2]==numbers[5]&&numbers[5]==numbers[8])
+    return 1;
+    if(numbers[3]==numbers[6]&&numbers[6]==numbers[9])
+    return 1;
+    if(numbers[1]==numbers[5]&&numbers[5]==numbers[9])
+    return 1;
+    if(numbers[3]==numbers[5]&&numbers[5]==numbers[7])
+    return 1;
+    int count=0;
+    for(int i=1;i<=9;i++){
+        if(numbers[i]=='X'||numbers[i]=='O')
+            count++;
+    }
+    if(count==9)
+        return 0;
+}
+    return -1;
+}
